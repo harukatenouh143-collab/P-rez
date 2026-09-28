@@ -1,0 +1,270 @@
+/* ==========================================================================
+   Variables y Paleta de Colores Cálidos
+   ========================================================================== */
+   :root {
+  --bg-gradient-start: #fff8f6;
+  --bg-gradient-end: #fcedeb;
+  --card-bg: #ffffff;
+  --primary-color: #8b263e;       /* Borgoña / Granate cálido */
+  --primary-hover: #6e1c2f;
+  --accent-gold: #d4af37;         /* Dorado elegante */
+  --text-dark: #2c1820;           /* Chocolate oscuro legibilidad */
+  --text-muted: #6b525d;
+  --shadow-soft: 0 12px 32px rgba(139, 38, 62, 0.08);
+  --shadow-modal: 0 20px 40px rgba(44, 24, 32, 0.2);
+  --radius-card: 24px;
+  --radius-btn: 50px;
+  --transition-fast: 0.25s ease;
+  --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Reset de márgenes y caja */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  color: var(--text-dark);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+/* Layout */
+.container {
+  width: 100%;
+  max-width: 680px;
+}
+
+/* Tarjeta Principal */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius-card);
+  padding: 3rem 2.5rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  animation: fadeIn 0.8s ease-out;
+}
+
+.stamp {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(139, 38, 62, 0.1);
+  padding-bottom: 1.5rem;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.title {
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-top: 0.25rem;
+  font-weight: 700;
+}
+
+/* Cuerpo de la Carta */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.paragraph {
+  font-size: 1.05rem;
+  color: var(--text-dark);
+}
+
+.text-lead {
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.quote {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--primary-color);
+  background: rgba(252, 237, 235, 0.5);
+  border-left: 3px solid var(--accent-gold);
+  padding: 1rem 1.25rem;
+  border-radius: 0 12px 12px 0;
+  margin: 0.5rem 0;
+}
+
+/* Pie de Carta y Botón */
+.card-footer {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.btn {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.875rem 2.25rem;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(139, 38, 62, 0.25);
+  transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn:hover, .btn:focus-visible {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 38, 62, 0.35);
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+.signature {
+  text-align: right;
+  width: 100%;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+}
+
+.signature span {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Modal Interactivo */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+  z-index: 1000;
+}
+
+.modal.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 24, 32, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: var(--radius-card);
+  padding: 2.5rem 2rem;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--shadow-modal);
+  border: 1px solid var(--accent-gold);
+  transform: scale(0.9);
+  transition: transform var(--transition-normal);
+  text-align: center;
+}
+
+.modal.is-open .modal-content {
+  transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: transparent;
+  border: none;
+  font-size: 1.75rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+
+.modal-close:hover {
+  color: var(--primary-color);
+}
+
+.heart-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: pulse 1.6s infinite ease-in-out;
+}
+
+.modal-title {
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.modal-text {
+  font-size: 1.05rem;
+  color: var(--text-dark);
+}
+
+/* Keyframes de Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* Accesibilidad: Respetar preferencias de movimiento del usuario */
+@media (prefers-reduced-motion: reduce) {
+  .card, .modal, .modal-content, .heart-icon, .btn {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 480px) {
+  .card {
+    padding: 2rem 1.25rem;
+  }
+  .modal-content {
+    padding: 2rem 1.25rem;
+  }
+}
